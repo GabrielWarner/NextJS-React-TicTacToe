@@ -1,14 +1,13 @@
 'use client'
 import { useState } from 'react'
 
-import styles from '../styles.module.css'
-export default function Square({ }) {
-    const [value, setValue] = useState<string | null>(null)
+interface SquareProps {
+    value: string | null; // Specify the expected type of 'value' here
+  }
 
-    function handleClick() {
-        setValue('X')
-    }
+import styles from '../styles.module.css'
+export default function Square({ value }: SquareProps) {
     return(
-        <button className={styles.square} onClick={handleClick}>{value}</button>
+        <button className={styles.square}>{value}</button>
     )
 }
