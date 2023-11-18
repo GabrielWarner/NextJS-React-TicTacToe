@@ -4,12 +4,18 @@ import styles from '../styles.module.css'
 import { useState } from 'react'
 
 export default function Board() {
+    const [xIsNext, setXIsNext] = useState(true)
     const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
 
     function handleClick(i: number) {
         const squareArray = squares.slice()
-        squareArray[i] = 'X'
+        if(xIsNext) {
+            squareArray[i] = 'X'
+        }else{
+            squareArray[i] = 'O'
+        }
         setSquares(squareArray)
+        setXIsNext(!xIsNext)
     }
 
     return(
