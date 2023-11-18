@@ -1,13 +1,11 @@
-'use client'
-import { useState } from 'react'
-
+import styles from '../styles.module.css'
 interface SquareProps {
-    value: string | null; // Specify the expected type of 'value' here
+    value: string | null;
+    onSquareClick: () => void;
   }
 
-import styles from '../styles.module.css'
-export default function Square({ value }: SquareProps) {
+export default function Square({ value, onSquareClick }: SquareProps) {
     return(
-        <button className={styles.square}>{value}</button>
+        <button className={styles.square} onClick={onSquareClick}>{value}</button>
     )
 }
