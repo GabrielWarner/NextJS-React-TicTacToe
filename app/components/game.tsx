@@ -1,9 +1,10 @@
+'use client'
 import { useState } from 'react'
 import Board from './board'
 
 export default function Game() {
     const [xIsNext, setXIsNext] = useState(true)
-    const [history, setHistory] = useState<Array<Array<string | null>>>(Array(9).fill(null))
+    const [history, setHistory] = useState<Array<Array<string | null>>>([Array(9).fill(null)])
     const currentSquares = history[history.length - 1];
 
     function handlePlay(nextSquares: Array<string | null>) {
@@ -13,7 +14,7 @@ export default function Game() {
 
     return(
         <>
-        <Board squares={currentSquares} xIsNext={xIsNext} onPlay={() => handlePlay}/>
+        <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay}/>
         </>
     )
 }
