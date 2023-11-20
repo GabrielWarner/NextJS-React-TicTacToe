@@ -1,12 +1,14 @@
 'use client'
 import Square from './square.tsx'
 import styles from '../styles.module.css'
-import { useState } from 'react'
 
-export default function Board() {
-    const [xIsNext, setXIsNext] = useState(true)
-    const [squares, setSquares] = useState<Array<string | null>>(Array(9).fill(null))
+interface BoardProps {
+    xIsNext: boolean;
+    squares: Array<string | null>;
+    onPlay: (nextSquares: (string | null)[]) => void;
+}
 
+export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
     const winner = determineWinner(squares)
     let status: string
 
@@ -48,8 +50,7 @@ export default function Board() {
         }else{
             squareArray[i] = 'O'
         }
-        setSquares(squareArray)
-        setXIsNext(!xIsNext)
+        onPlay(squareArray)
     }
 
     return(
