@@ -1,23 +1,28 @@
 'use client'
 import { useState } from 'react'
 import Board from './board'
+import next from 'next'
 
 export default function Game() {
-    const [xIsNext, setXIsNext] = useState(true)
     const [history, setHistory] = useState<Array<Array<string | null>>>([Array(9).fill(null)])
-    const currentSquares = history[history.length - 1];
+    const [currentMove, setCurrentMove] = useState<number>(0)
+    const xIsNext = currentMove % 2 === 0;
+    const currentSquares = history[currentMove];
+
 
     function handlePlay(nextSquares: Array<string | null>) {
-        setHistory([...history, nextSquares])
-        setXIsNext(!xIsNext)
+        const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]
+        setHistory(nextHistory)
+        setCurrentMove(nextHistory.length - 1)
     }
 
-    //TODO:
-    function jumpTo(nextMove) {
 
+    function jumpTo(nextMove: number) {
+        setCurrentMove(nextMove)
     }
 
-    const moves = history.map((squares, move) => {
+    //TODO: remove buttons after a user clicks to go back in history, remove buttons up to that point
+    const moves = history.slice(0, currentMove + 1).map((squares, move) => {
         let description
         if(move > 0){
             description = 'Go to move #' + move
