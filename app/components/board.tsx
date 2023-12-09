@@ -4,13 +4,24 @@ import styles from '../styles.module.css'
 
 interface BoardProps {
     xIsNext: boolean;
+    singlePlayer: boolean;
     squares: Array<string | null>;
     onPlay: (nextSquares: (string | null)[]) => void;
 }
 
-export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
+export default function Board({ xIsNext, singlePlayer, squares, onPlay }: BoardProps) {
     const winner = determineWinner(squares)
     let status: string
+
+    if (!xIsNext){
+        //If single player == true
+        if(singlePlayer){
+            //run ai handle play
+            aiHandlePlay(squares)
+        }else{
+
+        }
+      }
 
     if(winner){
         status = 'The Winner is ' + winner
@@ -52,6 +63,16 @@ export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
         }
         onPlay(squareArray)
     }
+
+    function aiHandlePlay(currentSquares: Array<string | null>) {
+        //loop ove current squares and fill first empty one
+        for (let index = 0; index < currentSquares.length; index++) {
+            if (currentSquares[index] == null){
+                handleClick(index)
+            }
+            
+        }
+      }
 
     return(
         <>

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <main>
-        <Game/>
+        <Game singlePlayer={false}/>
       </main>
     </main>
   )

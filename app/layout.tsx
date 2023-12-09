@@ -21,8 +21,8 @@ export default function RootLayout({
         <header>TIC TAC TOE</header>
         <nav>
           <ul>
-          <Link href='/'>SINGLE PLAYER</Link>
-          <Link href='/multiplayer'>Multiplayer</Link>
+          <Link href='/'>MULTI-PLAYER</Link>
+          <Link href='/single_player'>SINGLE PLAYER</Link>
           </ul>
         </nav>
         {children}

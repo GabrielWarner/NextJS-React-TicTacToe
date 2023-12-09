@@ -3,7 +3,11 @@ import { useState } from 'react'
 import Board from './board'
 import next from 'next'
 
-export default function Game() {
+interface BoardProps {
+    singlePlayer: boolean;
+}
+
+export default function Game({ singlePlayer }: BoardProps) {
     const [history, setHistory] = useState<Array<Array<string | null>>>([Array(9).fill(null)])
     const [currentMove, setCurrentMove] = useState<number>(0)
     const xIsNext = currentMove % 2 === 0;
@@ -21,7 +25,6 @@ export default function Game() {
         setCurrentMove(nextMove)
     }
 
-    //TODO: remove buttons after a user clicks to go back in history, remove buttons up to that point
     const moves = history.slice(0, currentMove + 1).map((squares, move) => {
         let description
         if(move > 0){
@@ -39,7 +42,7 @@ export default function Game() {
     return(
         <>
         <section>
-        <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay}/>
+        <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay} singlePlayer={singlePlayer}/>
         </section>
         <section>
         <ol>{moves}</ol>
