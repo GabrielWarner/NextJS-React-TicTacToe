@@ -6,6 +6,7 @@ export default function SinglePlayer() {
     <>
         <main className={styles.main}>
             <section>
+                <h1>Single Player</h1>
                 <Game singlePlayer={true}/>
             </section>
         </main>

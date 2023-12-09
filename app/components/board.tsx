@@ -26,7 +26,11 @@ export default function Board({ xIsNext, singlePlayer, squares, onPlay }: BoardP
     if(winner){
         status = 'The Winner is ' + winner
     }else{
-        status = 'Player turn: ' + (xIsNext? 'X' : 'O')
+        if(checkDraw(squares)){
+            status = 'The game is a draw!'
+        }else{
+            status = 'Player turn: ' + (xIsNext? 'X' : 'O')
+        }
     }
 
     function determineWinner(squares: Array<string | null>): string | null {
@@ -51,6 +55,15 @@ export default function Board({ xIsNext, singlePlayer, squares, onPlay }: BoardP
         return null
     }
 
+    function checkDraw (squares: Array<string | null>){
+        for (let index = 0; index < squares.length; index++) {
+            if(squares[index] == null){
+                return false
+            }
+        }
+        return true
+    }
+
     function handleClick(i: number): void {
         if (determineWinner(squares) || squares[i]) {
             return
@@ -65,14 +78,25 @@ export default function Board({ xIsNext, singlePlayer, squares, onPlay }: BoardP
     }
 
     function aiHandlePlay(currentSquares: Array<string | null>) {
-        //loop ove current squares and fill first empty one
+        console.log(currentSquares);
+    
+        // Create an array of empty square indices
+        let emptyIndices = [];
         for (let index = 0; index < currentSquares.length; index++) {
-            if (currentSquares[index] == null){
-                handleClick(index)
+            if (currentSquares[index] == null) {
+                emptyIndices.push(index);
             }
-            
         }
-      }
+    
+        // Select a random index from the array of empty squares
+        if (emptyIndices.length > 0) {
+            let randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+            handleClick(randomIndex); // Execute the move at the randomly selected empty square
+        }
+    
+        console.log(currentSquares);
+    }
+    
 
     return(
         <>
