@@ -1,5 +1,5 @@
-import Game from './components/game'
-import styles from './styles.module.css'
+import Game from '../components/game'
+import styles from '../styles.module.css'
 
 export default function Home() {
   return (

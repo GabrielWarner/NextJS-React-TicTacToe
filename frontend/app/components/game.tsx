@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import Board from './board'
 import next from 'next'
+import { useSession } from 'next-auth/react'
+import { redirect } from 'next/navigation'
 
 interface BoardProps {
     singlePlayer: boolean;
@@ -38,6 +40,13 @@ export default function Game({ singlePlayer }: BoardProps) {
             </li>
         )
     })
+
+    // const { data : session } = useSession({
+    //     required: true,
+    //     onUnauthenticated() {
+    //         redirect('/api/auth/signin?callbackUrl=/client')
+    //     }
+    // })
 
     return(
         <>
